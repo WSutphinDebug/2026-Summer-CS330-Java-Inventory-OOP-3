@@ -75,9 +75,15 @@ public class Armour extends Equippable implements Item
     public Item clone()
     {
         Armour cpy = new Armour();
+        cpy.name = super.name;
+        cpy.setDurability(this.getDurability());
+        cpy.setMaterial(this.getMaterial());
+        cpy.setModifier(this.getModifier());
+        cpy.setModifierLevel(this.getModifierLevel());
+        cpy.setElement(this.getElement());
+        cpy.setDefense(this.getDefense());
 
-        // Refer to the previous assignment
-
+        // Replace the return
         return cpy;
     }
 
@@ -94,7 +100,28 @@ public class Armour extends Equippable implements Item
             return false;
         }
 
+        Armour lhs = this;
         Armour rhsItem = (Armour) rhs;
+
+           if(!(lhs.name.equals(rhsItem.name))){
+            return false;
+        }
+        else if(!(lhs.getModifier().equals(rhsItem.getModifier()))){
+            return false;
+        }
+        else if(!(lhs.getMaterial().equals(rhsItem.getMaterial()))){
+            return false;
+        }
+        else if(lhs.getModifierLevel() != rhsItem.getModifierLevel()){
+            return false;
+        }
+        else if(!(lhs.getElement().equals(rhsItem.getElement()))){
+            return false;
+        }
+        else if(lhs.getDefense() != rhsItem.getDefense()){
+            return false;
+        }
+
 
         return this.name.equals(rhsItem.name)
             && this.getMaterial().equals(rhsItem.getMaterial())
@@ -127,7 +154,13 @@ public class Armour extends Equippable implements Item
     @Override
     public String toString()
     {
-        return "  Refer to the previous assignment...";
+         // Use String.format and the provided FMT_STR
+        return String.join(
+            System.lineSeparator(),
+            String.format(FMT_STR, super.getName(), this.getDurability(), this.getDefense(), this.getMaterial(), this.getModifier(), 
+            this.getModifierLevel(), this.getElement())
+            
+        );
     }
 }
 
